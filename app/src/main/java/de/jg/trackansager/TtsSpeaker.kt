@@ -10,6 +10,11 @@ import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import java.util.Locale
 
+/**
+ * Kapselt Text-to-Speech inkl. Audio-Ducking:
+ * Während der Ansage wird die Musik automatisch leiser geregelt
+ * (Amazon Music reagiert auf den transienten Audio-Fokus mit Ducking).
+ */
 class TtsSpeaker(private val ctx: Context) {
 
     enum class Position { START, END }
@@ -38,9 +43,11 @@ class TtsSpeaker(private val ctx: Context) {
                 Log.e(TAG, "TTS-Initialisierung fehlgeschlagen")
             }
         }
+        // Falls der Callback synchron kam, bevor die Zuweisung fertig war:
         if (ready && !configured) configure()
     }
 
+    /** Wird nach erfolgreicher TTS-Initialisierung aufgerufen. */
     private fun configure() {
         val t = tts ?: return
         if (configured) return
@@ -61,6 +68,10 @@ class TtsSpeaker(private val ctx: Context) {
         })
     }
 
+    /**
+     * Spricht eine Ansage für den gegebenen Titel/Interpreten.
+     * languageMode: Prefs.LANG_AUTO / LANG_DE / LANG_EN
+     */
     fun announce(title: String, artist: String, position: Position, languageMode: String) {
         val t = tts ?: return
         if (!ready) return
@@ -77,6 +88,7 @@ class TtsSpeaker(private val ctx: Context) {
 
         val result = t.setLanguage(locale)
         if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+            // Fallback: Systemsprache
             t.setLanguage(Locale.getDefault())
         }
 
@@ -112,6 +124,10 @@ class TtsSpeaker(private val ctx: Context) {
         }
     }
 
+    /**
+     * Einfache Heuristik: Enthält der Text Umlaute/ß oder häufige deutsche Wörter,
+     * gilt er als deutsch. Sonst englisch.
+     */
     private fun looksGerman(text: String): Boolean {
         if (Regex("[äöüßÄÖÜ]").containsMatchIn(text)) return true
         val germanWords = setOf(
@@ -122,7 +138,8 @@ class TtsSpeaker(private val ctx: Context) {
             "kein", "mehr", "gegen", "über", "unter", "durch", "bis", "ohne"
         )
         val words = text.lowercase(Locale.GERMAN).split(Regex("[^a-zäöüß]+")).filter { it.isNotBlank() }
-        return words.any { it in germanWords }
+        val hits = words.count { it in germanWords }
+        return hits >= 1
     }
 
     companion object {
