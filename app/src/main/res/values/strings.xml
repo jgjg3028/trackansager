@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TrackAnsager</string>
+    <string name="heading">TrackAnsager</string>
+    <string name="subheading">Sagt beim Musikhören (z.\u00A0B. Amazon Music) automatisch Titel und Interpret an. Playlist und Shuffle wählst du wie gewohnt in der Musik-App.</string>
+    <string name="permission_granted">✅ Benachrichtigungszugriff erteilt – die App ist aktiv.</string>
+    <string name="permission_missing">⚠️ Benachrichtigungszugriff fehlt. Bitte unten aktivieren, sonst kann die App den laufenden Titel nicht erkennen.</string>
+    <string name="btn_permission">Benachrichtigungszugriff einstellen</string>
+    <string name="switch_start">Ansage am Anfang des Songs</string>
+    <string name="switch_end">Ansage kurz vor Ende des Songs</string>
+    <string name="lead_seconds">Vorlauf der End-Ansage: %d Sekunden vor Schluss</string>
+    <string name="label_language">Ansagesprache</string>
+    <string name="lang_auto">Automatisch (pro Song erkennen)</string>
+    <string name="lang_de">Immer Deutsch</string>
+    <string name="lang_en">Immer Englisch</string>
+    <string name="switch_amazon_only">Nur auf Amazon Music reagieren</string>
+    <string name="btn_test">Test-Ansage abspielen</string>
+</resources>
