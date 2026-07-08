@@ -163,7 +163,7 @@ class AnnouncerService : NotificationListenerService() {
 
         Log.i(TAG, "Neuer Titel (${c.packageName}): $title – $artist")
 
-        if (Prefs.announceStart(this)) {
+        if (Prefs.enabled(this) && Prefs.announceStart(this)) {
             handler.postDelayed({
                 speaker?.announce(title, artist, TtsSpeaker.Position.START, Prefs.language(this))
             }, 800)
@@ -176,6 +176,7 @@ class AnnouncerService : NotificationListenerService() {
     private fun scheduleEndAnnouncement() {
         cancelEndAnnouncement()
 
+        if (!Prefs.enabled(this)) return
         if (!Prefs.announceEnd(this)) return
         val token = currentToken ?: return
         val c = watched[token]?.controller ?: return

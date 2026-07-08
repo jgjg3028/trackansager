@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val switchEnabled = findViewById<SwitchMaterial>(R.id.switchEnabled)
         val switchStart = findViewById<SwitchMaterial>(R.id.switchStart)
         val switchEnd = findViewById<SwitchMaterial>(R.id.switchEnd)
         val switchAmazonOnly = findViewById<SwitchMaterial>(R.id.switchAmazonOnly)
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val btnTest = findViewById<Button>(R.id.btnTest)
 
         // Aktuelle Werte laden
+        switchEnabled.isChecked = Prefs.enabled(this)
         switchStart.isChecked = Prefs.announceStart(this)
         switchEnd.isChecked = Prefs.announceEnd(this)
         switchAmazonOnly.isChecked = Prefs.amazonOnly(this)
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         textLead.text = getString(R.string.lead_seconds, lead)
 
         // Änderungen speichern
+        switchEnabled.setOnCheckedChangeListener { _, v -> Prefs.setEnabled(this, v) }
         switchStart.setOnCheckedChangeListener { _, v -> Prefs.setAnnounceStart(this, v) }
         switchEnd.setOnCheckedChangeListener { _, v -> Prefs.setAnnounceEnd(this, v) }
         switchAmazonOnly.setOnCheckedChangeListener { _, v -> Prefs.setAmazonOnly(this, v) }

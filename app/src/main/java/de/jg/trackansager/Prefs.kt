@@ -18,6 +18,10 @@ object Prefs {
     private fun sp(ctx: Context): SharedPreferences =
         ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 
+    /** Hauptschalter: Ansagen komplett an/aus */
+    fun enabled(ctx: Context): Boolean = sp(ctx).getBoolean("enabled", true)
+    fun setEnabled(ctx: Context, v: Boolean) = sp(ctx).edit().putBoolean("enabled", v).apply()
+
     /** Ansage beim Start eines neuen Songs */
     fun announceStart(ctx: Context): Boolean = sp(ctx).getBoolean("announce_start", true)
     fun setAnnounceStart(ctx: Context, v: Boolean) = sp(ctx).edit().putBoolean("announce_start", v).apply()

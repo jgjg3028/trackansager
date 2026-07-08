@@ -6,6 +6,7 @@
     <string name="permission_granted">✅ Benachrichtigungszugriff erteilt – die App ist aktiv.</string>
     <string name="permission_missing">⚠️ Benachrichtigungszugriff fehlt. Bitte unten aktivieren, sonst kann die App den laufenden Titel nicht erkennen.</string>
     <string name="btn_permission">Benachrichtigungszugriff einstellen</string>
+    <string name="switch_enabled">Ansagen aktiv</string>
     <string name="switch_start">Ansage am Anfang des Songs</string>
     <string name="switch_end">Ansage kurz vor Ende des Songs</string>
     <string name="lead_seconds">Vorlauf der End-Ansage: %d Sekunden vor Schluss</string>

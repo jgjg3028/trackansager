@@ -39,6 +39,14 @@
             android:layout_marginBottom="24dp" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchEnabled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/switch_enabled"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switchStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
